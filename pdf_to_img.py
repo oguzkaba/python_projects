@@ -29,9 +29,10 @@ def convert(file, outputDir):
 # args = sys.argv
 # if len(args) > 1:
 #     file = args[1]
-dosyalar = os.listdir("pdf/")
+dosyalar = os.listdir("C:/Users/Oğuz KABA/Desktop/Yeni klasör")
 for dosya in dosyalar:
     #print("pdf/" + dosya)
-    file = "pdf/" + dosya
-    convert(file, outputDir)
+    file = dosya
+    print(file)
+    #convert(file, outputDir)
 print(str(time.time()-zaman))    
