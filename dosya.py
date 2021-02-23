@@ -3,40 +3,41 @@ from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
 import sys
 import Ui_dosya
 
+
 # bulunduğu klasör
-#print(os.getcwd())
+# print(os.getcwd())
 
-#farklı klasöre geçiş
-#os.chdir("C:/Users/Oğuz KABA/Desktop/Diğer Dosyalar")
+# farklı klasöre geçiş
+# os.chdir("C:/Users/Oğuz KABA/Desktop/Diğer Dosyalar")
 
-#klasörde bulunan dosyalar
-#print(os.listdir())
+# klasörde bulunan dosyalar
+# print(os.listdir())
 
-#klasör oluşturma
+# klasör oluşturma
 # os.mkdir("aa")
 
-#kasör ismi değştirme
-#os.rename("aa","yeniKlasor")
+# kasör ismi değştirme
+# os.rename("aa","yeniKlasor")
 
-#klasör mü?
-#os.path.isdir("/home/sinan")
+# klasör mü?
+# os.path.isdir("/home/sinan")
 
-#doya ismi ver -> olmayandosya.py
-#os.path.split("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
+# doya ismi ver -> olmayandosya.py
+# os.path.split("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
 
-#dosyanın adını ve uzantısını ayrı ayrı ver -> ('olmayandosya', '.py')
-#os.path.splitext("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
+# dosyanın adını ve uzantısını ayrı ayrı ver -> ('olmayandosya', '.py')
+# os.path.splitext("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
 
-#dosya mı?
-#os.path.isfile("/home/sinan/pythonProject/adventureGame/index.py")
+# dosya mı?
+# os.path.isfile("/home/sinan/pythonProject/adventureGame/index.py")
 
-#dosya yada klasör var mı?
-#os.path.exists("/home")
+# dosya yada klasör var mı?
+# os.path.exists("/home")
 
-#dosyayı ilgili program ile açma
-#os.startfile('deneme.txt')
+# dosyayı ilgili program ile açma
+# os.startfile('deneme.txt')
 
-#uzantı ismi ile dosya listeleme
+# uzantı ismi ile dosya listeleme
 # uzanti=input('Uzantı ismi (.txt, .xlsx gibi) giriniz ?  :')
 # sayac=0
 # os.chdir('C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar')
@@ -49,29 +50,32 @@ import Ui_dosya
 
 class App(QMainWindow, Ui_dosya.Ui_MainWindow):
     
-    
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        
-        self.pushButton_4.clicked.connect(self.tiklama)
-        self.klasorSec.clicked.connect(self.select)
+        self.cikisYap.clicked.connect(self.exitApp)
+        self.klasorSec.clicked.connect(self.selectFolder)
+        self.klasorAc.clicked.connect(self.openFolder)
         
 
-    def tiklama(self):
-        print('Merhaba')
-        self.klasorSec.setEnabled(False)
 
-    def select(self):
-        path = QFileDialog.getOpenFileName(self, 'Open a file', '',
-                                     'All Files (*.*)')
-        if path != ('', ''):
-            self.lineEdit_3.setText(path[0])   
+    def selectFolder(self):
+        #yolDosya = QFileDialog.getOpenFileName(self, 'Open a file', '','All Files (*.*)')
+        self.yol=QFileDialog.getExistingDirectory(self,'Klasor Seciniz...')  
+        print(self.yol)                                 
+        if self.yol != (''):
+            self.lineEdit_3.setText(self.yol)
         else:
             QMessageBox.critical(self, "Uyarı", "Klasör seçimi yapmadınız..!")
 
+    def openFolder(self):
+        path=self.yol
+        os.system(f'start {os.path.realpath(path)}')
+        #os.open(self.lineEdit_3.text())
 
-                
+    def exitApp(self):
+        sys.exit()
 
 app = QApplication(sys.argv)
 pencere = App()
