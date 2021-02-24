@@ -5,7 +5,7 @@ import Ui_dosya
 
 
 class App(QMainWindow, Ui_dosya.Ui_MainWindow):
-
+    
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -28,6 +28,7 @@ class App(QMainWindow, Ui_dosya.Ui_MainWindow):
             QMessageBox.warning(self, 'Uyarı', 'Klasör seçimi yapmadınız..!')
             self.lineEdit_3.setText('')
             self.klasorAc.setEnabled(False)
+            return
 
     def openFolder(self):
         path = os.path.realpath(self.yol)
@@ -38,25 +39,43 @@ class App(QMainWindow, Ui_dosya.Ui_MainWindow):
         self.uzanti = self.comboBox.currentText()
         rname = self.lineEdit.text()
         self.rapno = self.lineEdit_2.text()
-
+        rangeNum = self.spinBox.text()
         if (self.uzanti == '' or rname == '' or self.rapno == ''):
             QMessageBox.warning(self, 'Uyarı', 'Boş alan bırakmayınız..!')
         else:
             sayac = 0
+            value = 0
             os.chdir(self.yol)
             dosyalar = os.listdir(self.yol)
             self.listView.clear()
             for dosya in dosyalar:
                 if dosya.endswith(self.uzanti):
-                    sayac = sayac+1
+                    value += 1
+            print(str(value))
+            if (int(rangeNum) == 3 and value > 999) or (int(rangeNum) == 4 and value > 9999) or (int(rangeNum) == 5 and value > 99999) or (int(rangeNum) == 6 and value > 999999):
+                QMessageBox.warning(
+                    self, 'Uyarı', 'Dosya sayısı seçilen hane alanından büyük !\nLütfen kontrol ediniz..!')
+                return    
+            progress = 0
+            for dosya in dosyalar:
+                if dosya.endswith(self.uzanti):
+                    sayac += 1
+                    progress += 100/value
                     self.listView.addItem(dosya)
                     self.label_5.setText('Adet: ' + str(sayac))
                     self.rangeNo()
                     os.rename(dosya, rname+self.rapno+self.uzanti)
-                    self.rapno=str(int(self.rapno)+1)
+                    if (progress > 99):
+                        self.progressBar.setValue(100)
+                    else:
+                        self.progressBar.setValue(int(progress))
+                    self.rapno = str(int(self.rapno)+1)
+                    print(str(progress))
             if (sayac == 0):
                 QMessageBox.warning(self, 'Uyarı', 'Dosya bulunamadı..!')
-        QMessageBox.information(self, 'Bilgi', str(sayac)+' Adet dosya isimlendirildi..!')        
+                return
+            QMessageBox.information(self, 'Bilgi', str(
+                sayac)+' Adet dosya isimlendirildi..!')
         self.baslat.setEnabled(False)
 
     def cleanEntry(self):
@@ -64,51 +83,62 @@ class App(QMainWindow, Ui_dosya.Ui_MainWindow):
         self.lineEdit_2.setText('')
         self.baslat.setEnabled(False)
 
-
     def rangeNo(self):
         rangeNum = self.spinBox.text()
         if (rangeNum == '3'):
-            if (int(self.rapno)<10):
-                self.rapno = '00'+ self.rapno
-            elif (int(self.rapno)<100): 
-                self.rapno = '0'+ self.rapno
+            if (int(self.rapno) < 10):
+                self.rapno = '00' + self.rapno
+            elif (int(self.rapno) < 100):
+                self.rapno = '0' + self.rapno
+            elif (int(self.rapno) < 1000):
+                self.rapno = self.rapno
             else:
-                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
+                QMessageBox.warning(
+                    self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
         if (rangeNum == '4'):
-            if (int(self.rapno)<10):
-                self.rapno = '000'+ self.rapno
-            elif (int(self.rapno)<100): 
-                self.rapno = '00'+ self.rapno
-            elif (int(self.rapno)<1000):
-                self.rapno = '0'+ self.rapno    
+            if (int(self.rapno) < 10):
+                self.rapno = '000' + self.rapno
+            elif (int(self.rapno) < 100):
+                self.rapno = '00' + self.rapno
+            elif (int(self.rapno) < 1000):
+                self.rapno = '0' + self.rapno
+            elif (int(self.rapno) < 10000):
+                self.rapno = self.rapno
             else:
-                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')      
+                QMessageBox.warning(
+                    self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
         elif (rangeNum == '5'):
-            if (int(self.rapno)<10):
-                self.rapno = '0000'+ self.rapno
-            elif (int(self.rapno)<100): 
-                self.rapno = '000'+ self.rapno
-            elif (int(self.rapno)<1000):
-                self.rapno = '00'+ self.rapno 
-            elif (int(self.rapno)<10000):
-                self.rapno = '0'+ self.rapno  
+            if (int(self.rapno) < 10):
+                self.rapno = '0000' + self.rapno
+            elif (int(self.rapno) < 100):
+                self.rapno = '000' + self.rapno
+            elif (int(self.rapno) < 1000):
+                self.rapno = '00' + self.rapno
+            elif (int(self.rapno) < 10000):
+                self.rapno = '0' + self.rapno
+            elif (int(self.rapno) < 100000):
+                self.rapno = self.rapno
             else:
-                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')       
-        elif (rangeNum == '6'):    
-            if (int(self.rapno)<10):
-                self.rapno = '00000'+ self.rapno
-            elif (int(self.rapno)<100): 
-                self.rapno = '0000'+ self.rapno
-            elif (int(self.rapno)<1000):
-                self.rapno = '000'+ self.rapno 
-            elif (int(self.rapno)<10000):
-                self.rapno = '00'+ self.rapno
-            elif (int(self.rapno)<100000):
-                self.rapno = '0'+ self.rapno            
+                QMessageBox.warning(
+                    self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
+        elif (rangeNum == '6'):
+            if (int(self.rapno) < 10):
+                self.rapno = '00000' + self.rapno
+            elif (int(self.rapno) < 100):
+                self.rapno = '0000' + self.rapno
+            elif (int(self.rapno) < 1000):
+                self.rapno = '000' + self.rapno
+            elif (int(self.rapno) < 10000):
+                self.rapno = '00' + self.rapno
+            elif (int(self.rapno) < 100000):
+                self.rapno = '0' + self.rapno
+            elif (int(self.rapno) < 1000000):
+                self.rapno = self.rapno
             else:
-                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')    
-        print(self.rapno) 
-        return self.rapno  
+                QMessageBox.warning(
+                    self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
+        print(self.rapno)
+        return self.rapno
 
     def exitApp(self):
         sys.exit()

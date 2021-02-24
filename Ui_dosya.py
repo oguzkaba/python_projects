@@ -111,6 +111,7 @@ class Ui_MainWindow(object):
         self.baslat.setGeometry(QtCore.QRect(130, 30, 75, 30))
         self.baslat.setObjectName("baslat")
         self.baslat.setEnabled(False)
+        self.baslat.setStyleSheet("color:rgb(62, 167, 30)")
         self.temizle = QtWidgets.QPushButton(self.groupBox_3)
         self.temizle.setGeometry(QtCore.QRect(210, 30, 75, 30))
         self.temizle.setObjectName("temizle")
