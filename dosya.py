@@ -4,78 +4,115 @@ import sys
 import Ui_dosya
 
 
-# bulunduğu klasör
-# print(os.getcwd())
-
-# farklı klasöre geçiş
-# os.chdir("C:/Users/Oğuz KABA/Desktop/Diğer Dosyalar")
-
-# klasörde bulunan dosyalar
-# print(os.listdir())
-
-# klasör oluşturma
-# os.mkdir("aa")
-
-# kasör ismi değştirme
-# os.rename("aa","yeniKlasor")
-
-# klasör mü?
-# os.path.isdir("/home/sinan")
-
-# doya ismi ver -> olmayandosya.py
-# os.path.split("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
-
-# dosyanın adını ve uzantısını ayrı ayrı ver -> ('olmayandosya', '.py')
-# os.path.splitext("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
-
-# dosya mı?
-# os.path.isfile("/home/sinan/pythonProject/adventureGame/index.py")
-
-# dosya yada klasör var mı?
-# os.path.exists("/home")
-
-# dosyayı ilgili program ile açma
-# os.startfile('deneme.txt')
-
-# uzantı ismi ile dosya listeleme
-# uzanti=input('Uzantı ismi (.txt, .xlsx gibi) giriniz ?  :')
-# sayac=0
-# os.chdir('C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar')
-# dosyalar = os.listdir('C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar')
-# for dosya in dosyalar:
-#      if dosya.endswith(uzanti):
-#             sayac=sayac+1 
-#             os.rename(dosya,str(sayac)+uzanti)
-# print(str(sayac) + ' Adet dosya ismi değiştirildi')
-
 class App(QMainWindow, Ui_dosya.Ui_MainWindow):
-    
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.cikisYap.clicked.connect(self.exitApp)
-        self.klasorSec.clicked.connect(self.selectFolder)
-        self.klasorAc.clicked.connect(self.openFolder)
-        
 
+        self.baslat.clicked.connect(self.startProcess)
+        self.klasorSec.clicked.connect(self.selectFolder)
+        self.temizle.clicked.connect(self.cleanEntry)
+        self.klasorAc.clicked.connect(self.openFolder)
+        self.cikisYap.clicked.connect(self.exitApp)
 
     def selectFolder(self):
         #yolDosya = QFileDialog.getOpenFileName(self, 'Open a file', '','All Files (*.*)')
-        self.yol=QFileDialog.getExistingDirectory(self,'Klasor Seciniz...')  
-        print(self.yol)                                 
+        self.yol = QFileDialog.getExistingDirectory(self, 'Klasor Seciniz...')
+        print(self.yol)
         if self.yol != (''):
             self.lineEdit_3.setText(self.yol)
+            self.klasorAc.setEnabled(True)
+            self.baslat.setEnabled(True)
         else:
-            QMessageBox.critical(self, "Uyarı", "Klasör seçimi yapmadınız..!")
+            QMessageBox.warning(self, 'Uyarı', 'Klasör seçimi yapmadınız..!')
+            self.lineEdit_3.setText('')
+            self.klasorAc.setEnabled(False)
 
     def openFolder(self):
-        path=self.yol
-        os.system(f'start {os.path.realpath(path)}')
-        #os.open(self.lineEdit_3.text())
+        path = os.path.realpath(self.yol)
+        os.startfile(path)
+        print(path)
+
+    def startProcess(self):
+        self.uzanti = self.comboBox.currentText()
+        rname = self.lineEdit.text()
+        self.rapno = self.lineEdit_2.text()
+
+        if (self.uzanti == '' or rname == '' or self.rapno == ''):
+            QMessageBox.warning(self, 'Uyarı', 'Boş alan bırakmayınız..!')
+        else:
+            sayac = 0
+            os.chdir(self.yol)
+            dosyalar = os.listdir(self.yol)
+            self.listView.clear()
+            for dosya in dosyalar:
+                if dosya.endswith(self.uzanti):
+                    sayac = sayac+1
+                    self.listView.addItem(dosya)
+                    self.label_5.setText('Adet: ' + str(sayac))
+                    self.rangeNo()
+                    os.rename(dosya, rname+self.rapno+self.uzanti)
+                    self.rapno=str(int(self.rapno)+1)
+            if (sayac == 0):
+                QMessageBox.warning(self, 'Uyarı', 'Dosya bulunamadı..!')
+        QMessageBox.information(self, 'Bilgi', str(sayac)+' Adet dosya isimlendirildi..!')        
+        self.baslat.setEnabled(False)
+
+    def cleanEntry(self):
+        self.lineEdit.setText('')
+        self.lineEdit_2.setText('')
+        self.baslat.setEnabled(False)
+
+
+    def rangeNo(self):
+        rangeNum = self.spinBox.text()
+        if (rangeNum == '3'):
+            if (int(self.rapno)<10):
+                self.rapno = '00'+ self.rapno
+            elif (int(self.rapno)<100): 
+                self.rapno = '0'+ self.rapno
+            else:
+                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')
+        if (rangeNum == '4'):
+            if (int(self.rapno)<10):
+                self.rapno = '000'+ self.rapno
+            elif (int(self.rapno)<100): 
+                self.rapno = '00'+ self.rapno
+            elif (int(self.rapno)<1000):
+                self.rapno = '0'+ self.rapno    
+            else:
+                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')      
+        elif (rangeNum == '5'):
+            if (int(self.rapno)<10):
+                self.rapno = '0000'+ self.rapno
+            elif (int(self.rapno)<100): 
+                self.rapno = '000'+ self.rapno
+            elif (int(self.rapno)<1000):
+                self.rapno = '00'+ self.rapno 
+            elif (int(self.rapno)<10000):
+                self.rapno = '0'+ self.rapno  
+            else:
+                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')       
+        elif (rangeNum == '6'):    
+            if (int(self.rapno)<10):
+                self.rapno = '00000'+ self.rapno
+            elif (int(self.rapno)<100): 
+                self.rapno = '0000'+ self.rapno
+            elif (int(self.rapno)<1000):
+                self.rapno = '000'+ self.rapno 
+            elif (int(self.rapno)<10000):
+                self.rapno = '00'+ self.rapno
+            elif (int(self.rapno)<100000):
+                self.rapno = '0'+ self.rapno            
+            else:
+                QMessageBox.warning(self, 'Uyarı', 'Aralıktan büyük veya negatif değer girildi..!')    
+        print(self.rapno) 
+        return self.rapno  
 
     def exitApp(self):
         sys.exit()
+
 
 app = QApplication(sys.argv)
 pencere = App()

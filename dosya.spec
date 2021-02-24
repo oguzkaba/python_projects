@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['dosya.py'],
-             pathex=['C:\\Users\\oguzkaba\\Documents\\GitHub\\python_projects'],
+             pathex=['C:\\Users\\Oğuz KABA\\Documents\\GitHub\\python_projects'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False )
+          console=False , icon='icon.ico')
