@@ -16,7 +16,7 @@
 # klasör mü?
 # os.path.isdir("/home/sinan")
 
-# doya ismi ver -> olmayandosya.py
+# dosya ismi ver -> olmayandosya.py
 # os.path.split("/home/sinan/pythonProject/adventureGame/olmayandosya.py")
 
 # dosyanın adını ve uzantısını ayrı ayrı ver -> ('olmayandosya', '.py')
@@ -41,3 +41,10 @@
 #             sayac=sayac+1 
 #             os.rename(dosya,str(sayac)+uzanti)
 # print(str(sayac) + ' Adet dosya ismi değiştirildi')
+# import time
+
+# print(str(time.ctime()))
+
+s="GV-VT-00027_1-1"
+s=s.split("_")
+print(s[0])
