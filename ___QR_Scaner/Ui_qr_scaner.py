@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.setWindowIcon(QtGui.QIcon('icon.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('icon.ico'))
         MainWindow.setEnabled(True)
         width=400
         height=300
