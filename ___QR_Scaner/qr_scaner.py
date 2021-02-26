@@ -76,18 +76,17 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
                 dosya.ljust(50,"-") + ' -> Aynı isimde dosya var,daha önce isimlendirilmiş olabilir..!\n')                    
                     else:
                         os.rename(dosya, dname)
-                if (progress > 99) or sayac == value:
-                    self.progressBar.setValue(100)
-                else:
-                    self.progressBar.setValue(int(progress))
+                self.progressBar.setValue(int(progress))
                     # print(str(progress))
         if (sayac == 0):
             QMessageBox.warning(self, 'Uyarı', 'Dosya bulunamadı..!')
             return
         self.btn_start.setEnabled(False)
         self.label_zaman.setText("Toplam Geçen Süre:" + str(round(time.time()-self.zaman))+"sn"
-                                 + " // Dosya Başına:" + str(round(time.time()-self.zaman)/sayac)+"sn")
+                                 + " // Dosya Başına:" + str(round(round(time.time()-self.zaman)/sayac))+"sn")
         shutil.rmtree("C:/temp/oguz/")
+        if (progress > 99) or sayac == value:
+            self.progressBar.setValue(100)
         if os.path.exists(self.yol+"/log.txt"):
             self.label_log.setVisible(True)
         # QMessageBox.information(self, 'Bilgi', str(
