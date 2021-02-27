@@ -7,8 +7,6 @@ import time
 from pdf2image import convert_from_path
 from pyzbar.pyzbar import decode
 from PIL import Image
-
-
 class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
 
     def __init__(self):
@@ -23,7 +21,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
 
     def selectFolder(self):
         self.yol = QFileDialog.getExistingDirectory(self, 'Klasor Seciniz...')
-        print(self.yol)
+        #print(self.yol)
         if self.yol != (''):
             self.lineEdit.setText(self.yol)
             self.btn_cancel.setEnabled(True)
@@ -59,7 +57,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
         for dosya in dosyalar:
             if dosya.endswith('.pdf'):
                 sayac += 1
-                print("sayac: "+str(sayac))
+                #print("sayac: "+str(sayac))
                 progress += 100/value
                 self.label_kalan.setText(
                     "Biten:"+str(sayac)+" // Toplam Adet:" + str(value))
@@ -94,7 +92,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
         # print(str(time.time()-self.zaman))
 
     def convertImg(self, file):
-        print("convertImg a gelindi...")
+        #print("convertImg a gelindi...")
         outputDir = "C:/temp/oguz/"
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
@@ -104,23 +102,23 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
         myfile = outputDir + 'output' + str(self.zaman) + '.jpg'
         #counter = counter + 1
         pages[0].save(myfile, "JPEG")
-        print("convertIMAGE: "+myfile)
+        #print("convertIMAGE: "+myfile)
         self.qrRead(myfile, file)
         # print(myfile)
 
     def qrRead(self, file, pdffile):
-        print("qrRead e gelindi...")
+        #print("qrRead e gelindi...")
         self.docname = ""
         try:
             d = decode(Image.open(file))
             self.docname = d[0].data.decode('ascii')
-            print("qrReade"+self.docname)
+            #print("qrReade"+self.docname)
         except:
             QMessageBox.warning(self, 'Uyarı', 'QR okunamadı..!\n' + file)
             log = open(self.yol+"/log.txt", "a")
             log.write(
                 pdffile.ljust(50,"-")  + ' -> QR okunamadı..!\n')
-            print("qrRead:"+self.docname)
+            #print("qrRead:"+self.docname)
             return
             # print(self.docname)
 
