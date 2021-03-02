@@ -1,3 +1,5 @@
+#coded by oguzkaba
+
 import os
 import shutil
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
@@ -80,8 +82,8 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
             QMessageBox.warning(self, 'Uyarı', 'Dosya bulunamadı..!')
             return
         self.btn_start.setEnabled(False)
-        self.label_zaman.setText("Toplam Geçen Süre:" + str(round(time.time()-self.zaman))+"sn"
-                                 + " // Dosya Başına:" + str(round(round(time.time()-self.zaman)/sayac))+"sn")
+        self.label_zaman.setText("Toplam Geçen Süre:" + str(round(time.time()-self.zaman,2))+"sn"
+                                 + " // Dosya Başına:" + str(round(round(time.time()-self.zaman)/sayac,2))+"sn")
         shutil.rmtree("C:/temp/oguz/")
         if (progress > 99) or sayac == value:
             self.progressBar.setValue(100)

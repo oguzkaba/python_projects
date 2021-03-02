@@ -1,3 +1,5 @@
+#coded by oguzkaba
+
 import os
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
 import sys

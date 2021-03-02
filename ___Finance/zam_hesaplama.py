@@ -1,3 +1,5 @@
+#coded by oguzkaba
+
 # MAAŞ Zam Hesaplama
 
 eski_Banka=input("'Eski'- Bankaya yatan(AGİ dahil) :")
