@@ -6,7 +6,7 @@ import time
 zaman = time.time()
 outputDir = "imag/"
 
-# file="deneme.pdf"
+file="C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar/pdf deneme/aa.pdf"
 
 
 def convert(file, outputDir):
@@ -25,14 +25,14 @@ def convert(file, outputDir):
         print(myfile)
         
 
-
+convert(file, outputDir)
 # args = sys.argv
 # if len(args) > 1:
 #     file = args[1]
-dosyalar = os.listdir("C:/Users/Oğuz KABA/Desktop/Yeni klasör")
-for dosya in dosyalar:
-    #print("pdf/" + dosya)
-    file = dosya
-    print(file)
-    #convert(file, outputDir)
-print(str(time.time()-zaman))    
+# dosyalar = os.listdir("C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar/pdf deneme")
+# for dosya in dosyalar:
+#     #print("pdf/" + dosya)
+#     file = dosya
+#     print(file)
+#     convert(file, outputDir)
+# print(str(time.time()-zaman))    

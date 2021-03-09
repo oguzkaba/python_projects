@@ -9,6 +9,7 @@ import time
 from pdf2image import convert_from_path
 from pyzbar.pyzbar import decode
 from PIL import Image
+import PyPDF2
 class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
 
     def __init__(self):
@@ -65,9 +66,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
                     "Biten:"+str(sayac)+" // Toplam Adet:" + str(value))
                 self.convertImg(dosya)
                 if self.docname != "":
-                    dname = str(self.docname)
-                    dname = dname.split("_")
-                    dname = dname[0]+".pdf"
+                    dname = str(self.docname)+".pdf"
                     if os.path.exists(dname):
                         QMessageBox.warning(self, 'Uyarı',
                                             'Aynı isimde dosya var\nDaha önce isimlendirilmiş olabilir..!')
@@ -77,7 +76,6 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
                     else:
                         os.rename(dosya, dname)
                 self.progressBar.setValue(int(progress))
-                    # print(str(progress))
         if (sayac == 0):
             QMessageBox.warning(self, 'Uyarı', 'Dosya bulunamadı..!')
             return
@@ -92,6 +90,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
         # QMessageBox.information(self, 'Bilgi', str(
         #     sayac)+' Adet dosya isimlendirildi..!')
         # print(str(time.time()-self.zaman))
+        self.pdfCombine()
 
     def convertImg(self, file):
         #print("convertImg a gelindi...")
@@ -126,6 +125,69 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
 
     def logOpen(self,event):
         os.startfile(self.yol+"/log.txt")
+
+    def pdfCombine(self):
+        dosyalar=os.listdir(self.yol)
+
+        for dosya in dosyalar:
+            yol1=self.yol+"/"
+            pdf_merger = PyPDF2.PdfFileMerger()
+            if dosya.endswith('.pdf'):                          #pdf dosyalasımı?                     
+                if dosya.count("_")>0 and dosya.count("-"):     #Daha önce isimlendirilmiş mi?
+                    docAppendname=[]                            #listeyi sıfırla
+                    dosyakisa = dosya.split("_")
+                    tekilDosya=dosyakisa[1]
+                    ind=tekilDosya.index("-")
+                    tekil=len(tekilDosya)-4
+                    tekilDosya=tekilDosya[ind+1:tekil]
+                    dosyakisa = dosyakisa[0]
+                    if tekilDosya=="1":
+                        print("Tekil Dosya : "+tekilDosya)
+                        os.rename(yol1+dosya,yol1+dosyakisa+".pdf")
+                    else:    
+                        for i in range(1,len(dosyalar)):
+                            dosya2=dosyalar[i]
+                            if dosya2.endswith('.pdf'):  
+                                dosya2kisa = dosya2.split("_")           
+                                dosya2kisa = dosya2kisa[0]
+                                if dosya!=dosya2 and dosyakisa==dosya2kisa: #aynı dosya değil ve kısaltılmış isimleri aynı ise
+                                    print("DOSYA1: "+dosya)
+                                    print("DOSYA2: "+dosya2)
+                                    varmi=dosya in docAppendname
+                                    if varmi==False:
+                                        docAppendname.append(dosya)
+                                    docAppendname.append(dosya2) 
+                                    docAppendname.sort()  
+                                    print(str(docAppendname)) 
+                        #print(str(docAppendname))
+
+                        if int(tekilDosya)>len(docAppendname) and 0<len(docAppendname):
+                            dockisa=docAppendname[0].split("_")
+                            print("Hata Dosya Eksik...."+str(dockisa[0]))  
+                        else:
+                            for pdf in docAppendname:
+                                print("Eklenecek Dosyalar : "+yol1+pdf)
+                                pdf_merger.append(yol1+pdf)
+                            pdf = pdf.split("_")           
+                            pdf = pdf[0]
+                            dosyaKontrol=os.path.exists(yol1+pdf+".pdf")
+                            if dosyaKontrol:
+                                print("Dosya Zaten Var....................................!")
+                            else:    
+                                print("Oluşturulacak Dosya :"+yol1+pdf)
+                                pdf_merger.write(yol1+pdf+".pdf")
+                                print("Dosya Oluşturuldu...: "+yol1+pdf)
+                                pdf_merger.close()    
+                            for pdf in docAppendname:
+                                print(yol1+pdf)
+                                os.remove(yol1+pdf)
+                                dosyalar.remove(pdf)
+                                print("SiLİNDİ... : "+yol1+pdf) 
+                            dosyalar=os.listdir(self.yol)
+                            print("Dosyalar Listesi : "+str(dosyalar))
+                            
+                
+        
 
 app = QApplication(sys.argv)
 pencere = App()

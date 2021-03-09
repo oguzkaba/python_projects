@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         self.spinBox.setObjectName("spinBox")
         self.spinBox.setEnabled(False)
         self.spinBox.setGeometry(QtCore.QRect(330, 58, 45, 25))
-        self.spinBox.setMinimum(200)
+        self.spinBox.setMinimum(250)
         self.spinBox.setMaximum(400)
         self.spinBox.setSingleStep(50)
         self.label_dpi = QtWidgets.QLabel(self.groupBox)
