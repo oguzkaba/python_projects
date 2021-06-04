@@ -38,6 +38,6 @@ for follower in my_follow:
     print(str(i)+"->"+bot.get_username_from_user_id(follower))
     i+=1
 
-
+bot.dow
 
 # bot.unfollow_everyone()
