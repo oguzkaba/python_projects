@@ -220,41 +220,41 @@
 
 #---------------------------------------------------------------------
 
-n,m=input().split()
+# n,m=input().split()
 
-A=[]
-B=[]
+# A=[]
+# B=[]
 
-for _ in range(int(n)):
-    a = input().split()
-    A.append(a[0])
+# for _ in range(int(n)):
+#     a = input().split()
+#     A.append(a[0])
 
-for _ in range(int(m)):
-    b = input().split()
-    B.append(b[0]) 
+# for _ in range(int(m)):
+#     b = input().split()
+#     B.append(b[0]) 
 
-#print(B)
-ab=[]
-for i in range(len(B)):
-    for j in range(len(A)):
-        if A.index('a',j)==j:# print(B[i]) 
-            ab.append(A.index(A[j],j)+1)
-            print(ab) 
+# #print(B)
+# ab=[]
+# for i in range(len(B)):
+#     for j in range(len(A)):
+#         if A.index('a',j)==j:# print(B[i]) 
+#             ab.append(A.index(A[j],j)+1)
+#             print(ab) 
             #print(A[j])
             #break
                         
 # print(str(A[1]))
 # print(B)
-"""
-5 2
-a
-a
-b
-a
-b
-a
-b
-"""
+# """
+# 5 2
+# a
+# a
+# b
+# a
+# b
+# a
+# b
+# """
 #--------------------
 
 # A=[2,1,5,2,3,4,2]
@@ -263,4 +263,373 @@ b
 #     if A.index(2,i)==i:
 #         print(A.index(2,i))
 #         #print(str(i))
+
+
+#-----------------------------------------------------
+# """
+# 4
+# -1
+# 10
+# 16
+# 18
+# """
+
+
+
+
+
+
+
+# class Person:
+#     def __init__(self,initialAge):
+#         # Add some more code to run some checks on initialAge
+#         if initialAge<0:
+#             print("Age is not valid, setting age to 0.")
+        
+            
+#     def amIOld(self):
+#         # Do some computations in here and print out the correct statement to the console
+#         #print(str(self.age))
+#         #age=self.age
+#         global age
+#         if age<13:  
+#             print("You are young.")
+
+#         elif age>=13 and age<18:
+#             print("You are a teenager.")
+
+#         else:    
+#             print("You are old.")
+
+#     def yearPasses(self):
+#         # Increment the age of the person in here
+#         global age
+#         age=age+1
+#         #print("deneme: "+str(age))
+        
+        
+
+# t = int(input())
+# for i in range(0, t):
+#     age = int(input())         
+#     p = Person(age)  
+#     p.amIOld()
+#     for j in range(0, 3):
+#         p.yearPasses()   
+#     p.amIOld()
+#     print("")    
+
+#-----------------------------------------------------
+
+# def swap_case(s:str):
+#     new=""
+#     for i in range(len(s)):
+#         if s[i].islower():
+#             new=new+s[i].upper()
+#         else:
+#             new=new+s[i].lower()       
+       
+#     return new          
+
+# if __name__ == '__main__':
+#     s = str(input())
+#     result = swap_case(s)
+#     print(result)
+
+#-----------------------------------------------------
+
+# def count_substring(string:str, sub_string:str):
+#     a=0
+#     result=0
+#     reslist=[]
+#     for _ in range(0,len(string)):
+#         result=string.find(sub_string,result+1)
+#         if result==-1:
+#             a=a
+#             # print('Yok: '+str(a)+'Result: '+str(result))
+#         else:
+#             if reslist.count(result)==0:
+#                 reslist.append(result)
+#             # print('Liste: '+str(len(reslist)))
+#             a=a+1
+#             #print('Buldum: '+str(a)+'Result: '+str(result))
+#     return len(reslist)
+
+
+
+# if __name__ == '__main__':
+#     string = input().strip()
+#     sub_string = input().strip()
     
+#     count = count_substring(string, sub_string)
+#     print('Son deger:'+str(count))
+
+#-----------------------------------------------------
+# if __name__ == '__main__':
+#     s = input()
+
+#     for i in range(len(s)):
+#         if s[i].isalnum():
+#             a='True'
+#             break
+#         else:
+#             a='False'
+#     print(a)        
+        
+#     for i in range(len(s)):
+#         if s[i].isalpha():
+#             a='True'
+#             break
+#         else:
+#             a='False'
+#     print(a) 
+        
+#     for i in range(len(s)):
+#         if s[i].isdigit():
+#             a='True'
+#             break
+#         else:
+#             a='False'
+#     print(a) 
+        
+#     for i in range(len(s)):
+#         if s[i].islower():
+#             a='True'
+#             break
+#         else:
+#             a='False'
+#     print(a) 
+        
+#     for i in range(len(s)):
+#         if s[i].isupper():
+#             a='True'
+#             break
+#         else:
+#             a='False'
+#     print(a) 
+           
+
+#-----------------------------------------------------
+
+# s='.|.'
+
+# # print(s.center(27,"-"))
+# # print((s*3).center(27,"-"))
+# # print((s*5).center(27,"-"))
+# # print(('WELCOME').center(27,"-"))
+# # print((s*5).center(27,"-"))
+# # print((s*3).center(27,"-"))
+# # print((s*1).center(27,"-"))
+
+# line,width = input().split()
+
+# for j in range(1,int(line),2):
+#     print((s*j).center(int(width),"-"))
+
+# print(('WELCOME').center(int(width),"-")) 
+
+# for k in range(int(line)-2,0,-2):
+#     print((s*k).center(int(width),"-"))   
+
+#-----------------------------------------------------
+
+# def print_formatted(number):
+#     # your code goes here
+
+#     width=len(str(bin(number).split('b')[-1]))+1
+#     for i in range(1,number+1):
+#         print(str(i).rjust(width-1)+str(oct(i).split('o')[-1]).rjust(width)+str(hex(i).split('x')[-1]).upper().rjust(width)+str(bin(i).split('b')[-1]).rjust(width))
+# if __name__ == '__main__':
+#     n = int(input())
+#     print_formatted(n)    
+
+#-----------------------------------------------------
+# import string
+# s=string.ascii_lowercase
+# a=[]
+# b=[]
+# #print('-'.join(s))
+# def print_rangoli(size):
+#     # your code goes here
+#     c=(size*2-1)+(size*2-2)
+#     for i in range(int(size)):
+#         a.append(s[size-1:i:-1]+s[i:size])    
+#     #print(a)
+    
+#     for i in range(len(a)):
+#         m=""
+#         m='-'.join(a[i])
+#         #print(m.center(c,"-"))
+#         a.remove(a[i])
+#         a.insert(i,m)  
+#     for i in range(len(a)-1,0,-1):
+#         b.append(a[i])
+    
+    
+#     for i in b:    
+#         print(str(i).center(c,"-"))
+#     for i in a:    
+#         print(str(i).center(c,"-"))
+
+# if __name__ == '__main__':
+#     n = int(input())
+#     print_rangoli(n)
+#-----------------------------------------------------
+# import os
+
+# def solve(s):
+#     b=[]
+#     a=str(s).split(' ')
+
+#     for i in range(len(a)):
+#         if a[i]!='':
+#             #print(i)
+#             #print(a[i][0])
+#             if a[i][0].isdigit():
+#                 # print('digit')
+#                 b.append(a[i]) 
+#             else:
+#                 # print('NOT digit')
+#                 b.append(a[i].title())
+#         else:b.append('')        
+#     m=""
+#     for i in b:
+#         m+=(i)+" "
+#     print(m)
+# if __name__ == '__main__':
+#     #fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+#     s = input()
+
+#     result = solve(s)
+
+#     #fptr.write(result + '\n')
+
+#     #fptr.close()
+
+#-----------------------------------------------------
+#Problem Solving(Basic)
+
+# def fizzBuzz(n):
+#     # Write your code here
+#     a=[]
+#     for i in range(1,int(n)+1):
+#         a.append(i)
+#         #print(i)
+    
+#     for i in range(len(a)):
+#         if a[i]%3==0 and a[i]%5==0:
+#             print("FizzBuzz")
+#         elif a[i]%3==0:
+#             print("Fizz")
+#         elif a[i]%5==0:
+#             print("Buzz")
+#         else:
+#             print(a[i])
+
+
+# if __name__ == '__main__':
+#     n = int(input().strip())
+
+#     fizzBuzz(n)
+
+#-----------------------------------------------------
+
+# T = int(input())
+# mylist=[]
+# for _ in range(T):
+#     mylist.append(input().split())
+# #print(mylist)  
+# j_listeven=[]
+# j_listodd=[]
+# for i in range(len(mylist)):
+#     i_list=mylist[i][0]
+#     sonuc=''
+#     j_listeven.clear()
+#     j_listodd.clear()
+#     for j in range(len(i_list)):
+#         if j%2==0:
+#             j_listeven.append(i_list[j])
+#         else:    
+#              j_listodd.append(i_list[j])
+#     for k in range(len(j_listeven)):
+#         sonuc=sonuc+j_listeven[k]
+#     sonuc=sonuc+' '    
+#     for l in range(len(j_listodd)):
+#         sonuc=sonuc+j_listodd[l]    
+        
+        
+#     print(sonuc)
+    # print('Çift: {}'.format(j_listeven))
+    # print('Tek: {}'.format(j_listodd))
+        
+#-----------------------------------------------------
+
+
+# import math
+# import os
+# import random
+# import re
+# import sys
+
+
+
+# if __name__ == '__main__':
+#     n = int(input().strip())
+#     arrReverse=[]
+#     arr = list(map(int, input().rstrip().split()))
+#     arrReverse=reversed(arr)
+#     print(*arrReverse)
+#-----------------------------------------------------
+#The Minion Game
+
+def minion_game(string:str):
+    # your code goes here
+    vowel =['A','E','I','O','U']
+    v=[]
+    c=[]
+    ss=[]
+    son=[]
+    soon=[]
+    spoints=0
+    kpoints=0
+    string=string.upper()
+    for i in string:
+        if i in vowel:
+            v.append(i)
+        else:
+            c.append(i)    
+    v=list(set(v)) 
+    c=list(set(c)) 
+    for i in string:#string to list
+        ss.append(i)
+    for h in range(len(string)+1):
+        for g in range(1,len(string)+1):
+            if len(ss[h:g])==0 :
+                pass
+            else:son.append(ss[h:g])        
+    for t in range(len(son)):
+        hece=""
+        for y in range(len(son[t])):
+            hece=hece+son[t][y] 
+        soon.append(hece)
+    # print(len(son))
+    print(soon)
+    for vi in v:#sesli başlangıç/başlangıçlar
+        kpoints+=soon.count(vi)
+    for ci in c:#sessiz başlangıç/başlangıçlar
+        #spoints+=soon.count(ci)    
+            aranacak=0
+            for z in range(len(soon)):
+                aranacak=soon.count(ci)
+            print('aranacak:'+str(aranacak))
+            # spoints+=soon.count(aranacak)
+            # print(soon.count(aranacak))
+
+
+    print('Stuart Points: {}'.format(str(spoints)))
+    print('Kevin Points: {}'.format(str(kpoints)))
+
+if __name__ == '__main__':
+    s = input()
+    minion_game(s)
