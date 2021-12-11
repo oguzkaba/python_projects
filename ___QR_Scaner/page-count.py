@@ -18,6 +18,6 @@ Read-only property that accesses the getNumPages() function.
 from PyPDF2 import PdfFileReader
 
 # Load the pdf to the PdfFileReader object with default settings
-with open("C:/Users/Oğuz KABA/Desktop/_QMS Dosyalar/b.pdf", "rb") as pdf_file:
+with open("___QR_Scaner/a.pdf", "rb") as pdf_file:
     pdf_reader = PdfFileReader(pdf_file)
     print(f"The total number of pages in the pdf document is {pdf_reader.numPages}")

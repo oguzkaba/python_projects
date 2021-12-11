@@ -583,53 +583,190 @@
 #-----------------------------------------------------
 #The Minion Game
 
-def minion_game(string:str):
-    # your code goes here
-    vowel =['A','E','I','O','U']
-    v=[]
-    c=[]
-    ss=[]
-    son=[]
-    soon=[]
-    spoints=0
-    kpoints=0
-    string=string.upper()
-    for i in string:
-        if i in vowel:
-            v.append(i)
-        else:
-            c.append(i)    
-    v=list(set(v)) 
-    c=list(set(c)) 
-    for i in string:#string to list
-        ss.append(i)
-    for h in range(len(string)+1):
-        for g in range(1,len(string)+1):
-            if len(ss[h:g])==0 :
-                pass
-            else:son.append(ss[h:g])        
-    for t in range(len(son)):
-        hece=""
-        for y in range(len(son[t])):
-            hece=hece+son[t][y] 
-        soon.append(hece)
-    # print(len(son))
-    print(soon)
-    for vi in v:#sesli başlangıç/başlangıçlar
-        kpoints+=soon.count(vi)
-    for ci in c:#sessiz başlangıç/başlangıçlar
-        #spoints+=soon.count(ci)    
-            aranacak=0
-            for z in range(len(soon)):
-                aranacak=soon.count(ci)
-            print('aranacak:'+str(aranacak))
-            # spoints+=soon.count(aranacak)
-            # print(soon.count(aranacak))
+# def minion_game(string):
+#     sesli = ['A','E','I','O','U']
+#     c = 0
+#     v = 0
+#     string=string.upper()
+ 
+#     n = len(string)
+#     for i, l in enumerate(string):
+#         if l in sesli:
+#             v += n-i
+#         else:
+#             c += n-i
+ 
+#     if v == c:
+#         print ("Draw")
+#     elif v > c:
+#         print ("Kevin {}".format(v))
+#     else:
+#         print ("Stuart {}".format(c))
+
+# if __name__ == '__main__':
+#     s = input()
+#     minion_game(s)
+
+#-----------------------------------------------------
+"""
+6
+aaa 123
+bbb 234
+ccc 545
+ddd 888
+eee 999
+fff 111
+ddd
+fff
+aaa
+sa
+d
+f
+"""
+# n = int(input())
+# names=[]  
+# phoneBook=[]
+# for i in range(n):
+#         name,phone = input().split()
+#         phoneBook.append([name,phone])        
+# for _ in range(n):
+#     name= input().split()
+#     names.append(name)
+
+# for i,l in enumerate(names):
+#     for j in range(n):
+#         if names[i][0]==phoneBook[j][0]:
+#             a=("{}={}".format(phoneBook[j][0],phoneBook[j][1])) 
+#             break
+#         else:a=('Not found')
+#     print(a)
+
+"""
+    solution-2-Fast**************************************
+"""
+
+# n = int(input())
+# phonebook = dict()
+# for i in range(n):
+#     line = input()
+#     line = line.split()
+#     phonebook[line[0]] = phonebook.get(line[0],line[1])
+    
+
+# while 1:
+#     try:
+#         q = input()
+#         if q in phonebook:
+#             print(str(q) + "=" + str(phonebook[q]))
+#         else:
+#             print("Not found")
+#     except:
+#         break
+#-----------------------------------------------------
+# from math import ceil
+
+# def merge_the_tools(string, k):
+#     width=len(string)
+#     list=[]
+#     s=(width/k)
+#     print(ceil(s))
+#     for i in range(int(s)):
+#         list.append(string[0+k*i:(k*i+1)])
 
 
-    print('Stuart Points: {}'.format(str(spoints)))
-    print('Kevin Points: {}'.format(str(kpoints)))
+#     print(list)    
 
+
+# if __name__ == '__main__':
+#     string, k = input(), int(input())
+#     merge_the_tools(string, k)
+
+#-----------------------------------------------------
+# #!/bin/python3
+
+# import math
+# import os
+# import random
+# import re
+# import sys
+
+
+
+# if __name__ == '__main__':
+    
+#     n = int(input().strip())
+    
+#     a=str(bin(n).split('b')[-1])
+#     print(a)
+#     son=[]
+    
+#     for i in range(len(a)):
+#         s=0
+#         for z in range(i,len(a)):
+            
+#             if a[i]==a[z]:
+#                 print('s={} -->  {}=={}'.format(s,a[i],a[z]))
+#                 s+=1
+#                 son.append(s)
+#             else:
+#                 break
+                 
+    
+#     print(max(son))                
+                
+
+# Python program to check if given
+# number is power of 2 or not 
+  
+# Function to check if x is power of 2
+# def isPowerOfTwo (x):
+  
+#     # First x in the below expression 
+#     # is for the case when x is 0 
+#     return (x and (not(x & (x - 1))) )
+  
+# # Driver code
+# if(isPowerOfTwo(124)):
+#     print('true')
+# else:
+#     print('false')    
+
+
+# Python program to check if given
+# number is power of 2 or not 
+  
+# Function to check if x is power of 2
+# def isPowerOfTwo(n):
+#     if (n == 0):
+#         return False
+#     while (n != 1):
+#             if (n % 2 != 0):
+#                 return False
+#             n = n // 2
+              
+#     return True                
+
+
+# # Driver code
+# if(isPowerOfTwo(32)):
+#     print('Yes')
+# else:
+#     print('No')
+# if(isPowerOfTwo(64)):
+#     print('Yes')
+# else:
+#     print('No')
+
+#------------------Merge the Tools!----------------
+
+def merge_the_tools(string, k):
+    for i in range(0, len(string), k):
+        uniq = ''
+        for c in string[i : i+k]:
+            if (c not in uniq):
+                uniq+=c
+        print(uniq)
+    
 if __name__ == '__main__':
-    s = input()
-    minion_game(s)
+    string, k = input(), int(input())
+    merge_the_tools(string, k)

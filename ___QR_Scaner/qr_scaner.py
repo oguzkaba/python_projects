@@ -1,7 +1,9 @@
 #coded by oguzkaba
 
 import os
+import time
 import shutil
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
 import sys
 import Ui_qr_scaner
@@ -65,6 +67,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
                 self.label_kalan.setText(
                     "Biten:"+str(sayac)+" // Toplam Adet:" + str(value))
                 self.convertImg(dosya)
+                QtCore.QCoreApplication.processEvents()#  threading
                 if self.docname != "":
                     dname = str(self.docname)+".pdf"
                     if os.path.exists(dname):
@@ -123,7 +126,7 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
             return
             # print(self.docname)
 
-    def logOpen(self,event):
+    def logOpen(self):
         os.startfile(self.yol+"/log.txt")
 
     def pdfCombine(self):
@@ -190,6 +193,6 @@ class App(QMainWindow, Ui_qr_scaner.Ui_MainWindow):
         
 
 app = QApplication(sys.argv)
-pencere = App()
+pencere =App()
 pencere.show()
 sys.exit(app.exec_())

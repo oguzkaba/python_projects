@@ -3,7 +3,9 @@ import time
 
 driver=webdriver.Chrome(executable_path='C:/Users/Oğuz KABA/Documents/GitHub/python_projects/___Selenium/chromedriver.exe')
 
-url="http://github.com/oguzkaba"
+#url="https://github.com/oguzkaba"
+url="https://oguzkaba.github.io"
+#url="https://"
 
 driver.get(url)
 
