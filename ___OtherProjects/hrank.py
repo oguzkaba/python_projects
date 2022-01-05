@@ -144,7 +144,7 @@
 # output((bool(len(re.findall("[ThisisMatrix#%!]",matrix[1]))>0)))
 
 
-# ----------------------------------------------------------------------------
+# ------------------------Lists----------------------------------------------------
 # insert i e: Insert integer  at position .
 # print: Print the list.
 # remove e: Delete the first occurrence of integer .
@@ -336,7 +336,7 @@
 #     result = swap_case(s)
 #     print(result)
 
-#-----------------------------------------------------
+#------------------Find a string-----------------------------------
 
 # def count_substring(string:str, sub_string:str):
 #     a=0
@@ -759,14 +759,114 @@ f
 
 #------------------Merge the Tools!----------------
 
-def merge_the_tools(string, k):
-    for i in range(0, len(string), k):
-        uniq = ''
-        for c in string[i : i+k]:
-            if (c not in uniq):
-                uniq+=c
-        print(uniq)
+# def merge_the_tools(string, k):
+#     for i in range(0, len(string), k):
+#         uniq = ''
+#         for c in string[i : i+k]:
+#             if (c not in uniq):
+#                 uniq+=c
+#         print(uniq)
     
-if __name__ == '__main__':
-    string, k = input(), int(input())
-    merge_the_tools(string, k)
+# if __name__ == '__main__':
+#     string, k = input(), int(input())
+#     merge_the_tools(string, k)
+
+
+#------------------input()----------------
+# s=input().split(" ")
+
+# x=s[0]
+
+
+# islem = eval(input().replace("x",x))
+
+# k=int(s[1])
+# result=0
+
+# print(k==islem)     
+
+
+#------------------Python If-Else----------------
+
+# if __name__ == '__main__':
+#     n = int(input().strip())
+
+#     even=(n%2==0)
+
+#     if (not even):
+#         print("Weird")
+#     elif  n<2 and n>=5:
+#         print("Not Weird")
+#     elif  n>5 and n<=20:
+#         print("Weird")
+#     else:
+#         print("Not Weird")
+
+
+#--------------------------DefaultDict Tutorial------------
+
+# from collections import defaultdict
+
+# n, m = map(int,input().split())
+
+# a = defaultdict(list)
+# for i in range(1, n + 1):
+#     a[input()].append(i)
+
+# for i in range(1, m + 1):
+#     key = input()
+#     if len(a[key]) > 0:
+#         print(" ".join(str(c) for c in a[key]))
+#     else:
+#         print(-1)
+
+
+#--------------------------Set .add()--------------------------
+# n=int(input())
+# list1=[]
+# for _ in range(n):
+#     list1.append(input())
+
+# print(len(set(list1)))
+
+#--------------------------List Comprehensions--------------------------
+
+# if __name__ == '__main__':
+#     x = int(input())
+#     y = int(input())
+#     z = int(input())
+#     n = int(input())
+    
+#     list1=[i for i in range(x+1)]
+#     list2=[i for i in range(y+1)]
+#     list3=[i for i in range(z+1)]
+
+#     list=[]
+
+#     for i in list1:
+#         for j in list2:
+#             for k in list3:
+#                 if i+j+k!=n:
+#                     list.append([i,j,k])
+
+#     print(list)
+
+#--------------------------Print Function--------------------------
+
+# if __name__ == '__main__':
+#     n = int(input())
+#     for i in range(1,n+1):
+#         print(i,end="")
+
+#--------------------------Write a function--------------------------
+
+# def is_leap(year):
+#     leap = False
+    
+#     # Write your logic here
+#     if (year%4==0 and year%400==0) or  (year%4==0 and year%100!=0):
+#         leap=True
+#     return leap
+
+# year = int(input())
+# print(is_leap(year))
