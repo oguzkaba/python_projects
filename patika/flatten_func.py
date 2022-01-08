@@ -7,11 +7,12 @@ output: [1,'a','cat',2,3,'dog',4,5]
 
 """
 
-
-import itertools
- 
-List_1 = [[1,'a',['cat'],2],[[[3]],'dog'],4,5] #List to be flattened
- 
-List_flat = list(itertools.chain(*List_1))
- 
-print(List_flat)
+def flatten_list(strArr):
+    if not strArr:
+        return []
+    elif isinstance(strArr[0],list):
+        return (flatten_list(strArr[0])+flatten_list(strArr[1:]))
+    else:
+        return [strArr[0]]+flatten_list(strArr[1:])
+        
+print(flatten_list(eval(input())))
