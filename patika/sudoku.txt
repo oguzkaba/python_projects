@@ -1,0 +1,40 @@
+def SudokuQuadrantChecker(strArr):
+
+  list1=[]
+
+  for i in range(0,9):  
+    for j in range(1,18):
+      if strArr[i][j]!=",":
+        list1.append(strArr[i][j])
+  # print(list1)
+
+  problem=[]
+#horizontal
+  for i in range(0,81,9):
+      # print(list1[i:i+9])
+      for z in range(0,9):
+        for t in range(z+1,9):
+          if list1[i:i+9][z]==list1[i:i+9][t] and list1[i:i+9][z]!="x":
+            pass
+            # print(z,t)
+
+#vertical
+  for i in range(0,9):
+      print(list1[i::9])
+      for z in range(0,9):
+        for t in range(z+1,9):
+          if list1[i::9][z]==list1[i::9][t] and list1[i::9][z]!="x":
+            pass
+            print(z*z+1,t*9+10)
+      
+  # code goes here
+
+    
+    
+# keep this function call here
+SudokuQuadrantChecker(input())
+
+
+
+
+
